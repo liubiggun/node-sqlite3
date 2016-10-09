@@ -37,13 +37,24 @@
         'defines': [
           'WIN32'
         ],
+        'conditions': [
+          ['target_arch == "ia32"', {
+            'variables': {
+              'openssl_root%': 'OpenSSL-Win32',
+            }
+          }, {
+            'variables': {
+              'openssl_root%': 'OpenSSL-Win64',
+            }
+          }]
+        ],
         'link_settings': {
           'libraries': [
             '-llibeay32.lib',
             '-lssleay32.lib',
           ],
           'library_dirs': [
-            '<(SHARED_INTERMEDIATE_DIR)/sqlite-autoconf-<@(sqlite_version)/OpenSSL-Win64'
+            '<(SHARED_INTERMEDIATE_DIR)/sqlite-autoconf-<@(sqlite_version)/<(openssl_root)'
           ]
         }
       }]
